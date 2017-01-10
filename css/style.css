@@ -1,0 +1,21 @@
+	
+	body{
+		font-weight: bold;
+		background:url('../img/zumbi_back.jpg');
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+
+	
+    .rows{
+		background: rgba(255,255,255,0.6);    	
+    }
+
+    .buttons{
+    	padding: 2%;
+    }
+
+    a{
+    	color: #333;
+    }

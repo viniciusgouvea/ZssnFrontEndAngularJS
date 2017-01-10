@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8"> 
+	<title>ZSSN (Zombie Survival Social Network)</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+	<body>
+		<div class="container-fluid">
+
+			<!--  Menu  -->
+
+			<div class="row">
+				<div class="navbar-header">
+					<button aria-controls="bs-navbar" aria-expanded="false" class="collapsed navbar-toggle" data-target="#bs-navbar" data-toggle="collapse" type="button">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="" class="navbar-brand">ZSSN</a>
+				</div>
+				<nav class="collapse navbar-collapse" id="bs-navbar">
+					<ul class="nav navbar-nav">
+						<li> 
+							<a href="index.html"> Home</a> 
+						</li>
+						<li> 
+							<a href="person.html"> Person</a> 
+						</li>
+						<li> 
+							<a href="report.html"> Reports</a> 
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+			<!-- fim do menu -->
+
+			<div class="row rows">
+				<div ng-app="myApp" ng-controller="Person">
+
+					<!--  buttons  -->
+					<div class="col-md-8 buttons">
+						<button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">
+							Add survivor
+						</button>
+						<button type="button" class="btn btn-success " data-toggle="modal" data-target="#modalLocalization">
+							Update survivor location
+						</button>
+						<button type="button" class="btn btn-success " data-toggle="modal" data-target="#modalTrade">
+							Trade items
+						</button>
+						<button type="button" class="btn btn-success " data-toggle="modal" data-target="#modalInvetory">
+							Add inventory
+						</button>
+					</div>
+
+					<!-- Modal add new people -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+								</div>
+								<div class="modal-body">
+								<form name="myRegisterForm" ng-submit="SendData(people)">
+									<div class="form-group">
+									    <label for="exampleInputEmail1">Name:</label>
+									    <input type="text" class="form-control" name="name" ng-model="people.name" placeholder="name">
+									</div>
+									<div class="form-group">
+									    <label for="exampleInputEmail1">age:</label>
+									    <input type="text" class="form-control" name="age" ng-model="people.age" placeholder="age">
+									</div>
+									<div class="form-group">
+									    <label for="exampleInputEmail1">gender:</label>
+									    <input type="text" class="form-control" name="gender" ng-model="people.gender" placeholder="gender">
+									</div>
+									<div class="form-group">
+									    <label for="exampleInputEmail1">lonlat:</label>
+									    <input type="text" class="form-control" name="lonlat" ng-model="people.lonlat" placeholder="lonlat">
+									</div>
+									<div class="form-group">
+									    <label for="exampleInputEmail1">infected:</label>									
+										<select class="form-control" name="infected" ng-model="people.infected">
+											<option>false</option>
+											<option>true</option>
+										</select>
+									</div>
+									<button type="submit" class="btn btn-default" >Send</button>
+									</form>
+								</div>
+								<div class="modal-footer">
+								
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Modal update localization -->
+					<div class="modal fade" id="modalLocalization" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+									</div>
+									<div class="modal-body">
+									<form name="myRegisterForm" ng-submit="UpdateLonlat(people)">
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Id:</label>
+										    <input type="text" class="form-control" name="name" ng-model="people.id" placeholder="name">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Lonlat:</label>
+										    <input type="text" class="form-control" name="lonlat" ng-model="people.lonlat" placeholder="lonlat">
+										</div>
+										<button type="submit" class="btn btn-default" >Send</button>
+										</form>
+									</div>
+									<div class="modal-footer">
+									
+									</div>
+								</div>
+							</div>
+					</div>
+					<!-- Modal trade  -->
+					<div class="modal fade" id="modalTrade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+									</div>
+									<div class="modal-body">
+									<form name="myRegisterForm" ng-submit="Trade(trade)">
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Id:</label>
+										    <input type="text" class="form-control" name="person_id" ng-model="trade.person_id" placeholder="id">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Water:</label>
+										    <input type="text" class="form-control" name="water" ng-model="trade.water" placeholder="water">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Food:</label>
+										    <input type="text" class="form-control" name="food" ng-model="trade.food" placeholder="food">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Medication:</label>
+										    <input type="text" class="form-control" name="medication" ng-model="trade.medication" placeholder="medication">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Ammunition:</label>
+										    <input type="text" class="form-control" name="ammunition" ng-model="trade.ammunition" placeholder="ammunition">
+										</div>
+										<hr>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Id 2:</label>
+										    <input type="text" class="form-control" name="person_id2" ng-model="trade.person_id2" placeholder="id2">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Water:</label>
+										    <input type="text" class="form-control" name="water2" ng-model="trade.water2" placeholder="water2">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Food:</label>
+										    <input type="text" class="form-control" name="food2" ng-model="trade.food2" placeholder="food2">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Medication:</label>
+										    <input type="text" class="form-control" name="medication2" ng-model="trade.medication2" placeholder="medication2">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Ammunition:</label>
+										    <input type="text" class="form-control" name="ammunition2" ng-model="trade.ammunition2" placeholder="ammunition2">
+										</div>
+										<button type="submit" class="btn btn-default" >Send</button>
+										</form>
+									</div>
+									<div class="modal-footer">
+									
+									</div>
+								</div>
+							</div>
+					</div>
+
+					<!-- Modal trade  -->
+					<div class="modal fade" id="modalInvetory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+									</div>
+									<div class="modal-body">
+									<form name="myRegisterForm" ng-submit="inventoryPost(inventory)">
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Id:</label>
+										    <input type="text" class="form-control" name="person_id" ng-model="inventory.person_id" placeholder="id">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Water:</label>
+										    <input type="text" class="form-control" name="water" ng-model="inventory.water" placeholder="water">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Food:</label>
+										    <input type="text" class="form-control" name="food" ng-model="inventory.food" placeholder="food">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Medication:</label>
+										    <input type="text" class="form-control" name="medication" ng-model="inventory.medication" placeholder="medication">
+										</div>
+										<div class="form-group">
+										    <label for="exampleInputEmail1">Ammunition:</label>
+										    <input type="text" class="form-control" name="ammunition" ng-model="inventory.ammunition" placeholder="ammunition">
+										</div>										
+										<button type="submit" class="btn btn-default" >Send</button>
+										</form>
+									</div>
+									<div class="modal-footer">
+									
+									</div>
+								</div>
+							</div>
+					</div>
+
+					<!-- tabela de  pessoas -->
+					<table class="table table-bordered">
+					 	<tr>
+					 		<th> Name </th>
+					 		<th> age </th>
+					 		<th> gender </th>
+					 		<th> localization </th>
+					 		<th> infected </th>
+					 		<th> action </th>
+					 	</tr>
+					 	<tr  ng-repeat="people in person">
+					 		<td >{{people.name}}</td>
+					 		<td >{{people.age}}</td>
+					 		<td >{{people.gender}}</td>
+					 		<td >{{people.lonlat}}</td>
+					 		<td >{{people.infected}}</td>
+					 		<td>
+					 		<a ng-click="UpdateData(people.id)">Change Infected</a>
+					 		</td>
+					 										
+				 		</tr>
+					</table>						
+				</div>
+			</div>
+
+		</div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="libs/dirPagination.js"></script>
+		<script type="text/javascript" src="app/app.js"></script>
+	</body>
+</html>
+
+
+ 
